@@ -28,7 +28,7 @@ const service= {
         let data= await mongo.users.findOneAndUpdate({email:user.email},{$set:{resetToken:hashToken,resetExpire:expiry}},{ReturnDocument: "after" })
         console.log(data)
     
-        const link=`https://passwordreset1.herokuapp.com/resetPassword/${user._id}/${token}`
+        const link=`https://gracious-keller-611545.netlify.app/resetPassword/${user._id}/${token}`
         
         await sendMail(user.email,"Password Reset",link)
         
