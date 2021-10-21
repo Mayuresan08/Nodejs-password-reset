@@ -69,7 +69,7 @@ const service={
             console.log(token)
         
             //sending response as a token
-            res.send({Token:token})
+            res.status(200).send(token)
         
         }    
 

@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cors= require("cors")
 const express= require("express");
 const mongo = require("./shared/mongo")
 const app=express();
@@ -10,6 +11,8 @@ const userRoutes=require("./Routes/users.routes");
 try{
 
     await mongo.connect()
+
+    app.use(cors())
 
     app.use(express.json())
 

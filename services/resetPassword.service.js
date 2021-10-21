@@ -28,7 +28,7 @@ const service= {
         let data= await mongo.users.findOneAndUpdate({email:user.email},{$set:{resetToken:hashToken,resetExpire:expiry}},{ReturnDocument: "after" })
         console.log(data)
     
-        const link=`http://localhost:3001/resetPassword/${user._id}/${token}`
+        const link=`http://localhost:3000/resetPassword/${user._id}/${token}`
         
         await sendMail(user.email,"Password Reset",link)
         
@@ -52,7 +52,7 @@ const service= {
 
     async verifyAndUpdatePassword(req,res,next){
         let user= await mongo.users.findOne({_id:ObjectId(req.params.userId)});
-    if(!user) return res.status(400).send("Invalid link or expired")
+    if(!user.resetToken) return res.status(400).send("Invalid link or expired")
 
     let token=req.params.token
 
